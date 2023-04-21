@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Slide Navbar</title>
+	<link rel="stylesheet" type="text/css" href="authentication.css">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+</head>
+<body>
+	<div class="main">  	
+		<input type="checkbox" id="chk" aria-hidden="true">
+
+			<div class="signup">
+				<form>
+					<label for="chk" aria-hidden="true">Sign up</label>
+					<input type="email" id="email" placeholder="Email">
+					<input type="password" id="password" placeholder="Password">
+					<!-- <button type="button" onclick="login()">Login</button> -->
+					<button type="button" onclick="signup()">Signup</button>
+				</form>
+			</div>
+
+			 <div class="login">
+				<form>
+					<label for="chk" aria-hidden="true">Login</label>
+					 <input type="email" id="mail" placeholder="Email">
+					<input type="password" id="pswd" placeholder="Password">
+				    <button type="button" onclick="login()">Login</button> 
+					<!-- <button type="button" onclick="signup()">Signup</button> -->
+				</form> 
+			</div>
+	</div>
+
+	<script>
+		// Initialize Firebase
+		var firebaseConfig = {
+		  apiKey: "AIzaSyA15euD0yaJfLzvdRiXhw1gQzSrhJTmNeo",
+		  authDomain: "todo-c6a40.firebaseapp.com",
+		  projectId: "todo-c6a40",
+		  storageBucket: "todo-c6a40.appspot.com",
+		  messagingSenderId: "391751617564",
+		  appId: "1:391751617564:web:16694c60a8ef1bda2ea3d9"
+		};
+		firebase.initializeApp(firebaseConfig);
+		
+		// Login function
+		function login() {
+		  var email = document.getElementById("mail").value;
+		  var password = document.getElementById("pswd").value;
+		  
+		  firebase.auth().signInWithEmailAndPassword(email, password)
+		  .then((userCredential) => {
+			// Signed in
+			var user = userCredential.user;
+			console.log(user);
+			alert(" successful !!!")
+			window.location.href = "index.html";
+		  })
+		  .catch((error) => {
+			var errorCode = error.code;
+			var errorMessage = error.message;
+			console.log(errorMessage);
+		  });
+		}
+		
+		// Signup function
+		function signup() {
+		  var email = document.getElementById("email").value;
+		  var password = document.getElementById("password").value;
+		  
+		  firebase.auth().createUserWithEmailAndPassword(email, password)
+		  .then((userCredential) => {
+			// Signed up
+			var user = userCredential.user;
+			console.log(user);
+			alert(" successful !!!")
+			window.location.href = "index.html";
+		  })
+		  .catch((error) => {
+			var errorCode = error.code;
+			var errorMessage = error.message;
+			console.log(errorMessage);
+		  });
+		}
+	  </script>
+</body>
+</html>
